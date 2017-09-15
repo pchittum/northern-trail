@@ -6,14 +6,13 @@
 
     <aura:registerEvent name="onchange" type="c:RangeChange"/>
 
-    <aura:attribute name="label" type="String" default="Price Range:"/>
     <aura:attribute name="filterName" type="String"/>
     <aura:attribute name="min" type="String" default="0"/>
     <aura:attribute name="max" type="String" default="1000"/>
     <aura:attribute name="step" type="String" default="10"/>
-    
+
     <lightning:layout >
-        <lightning:layoutItem >{!v.field} Range:</lightning:layoutItem>
+        <lightning:layoutItem >Range:</lightning:layoutItem>
 		<lightning:layoutItem >
 	    		<div aura:id="slider" class="slider"/>
         </lightning:layoutItem>            
