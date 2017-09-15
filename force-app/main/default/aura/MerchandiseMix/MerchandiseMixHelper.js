@@ -4,13 +4,13 @@
         action.setStorable();
 		action.setParams({
       		"mixId": mixId
-	    	});
-	    	action.setCallback(this, function(response) {
+        });
+        action.setCallback(this, function(response) {
 			var result = response.getReturnValue();
             component.set("v.mixItems", result);
             this.calculateMix(component);
-	    	});
-	    	$A.enqueueAction(action);
+        });
+        $A.enqueueAction(action);
 	},
 
 	addItem : function(component, mixItem) {
@@ -19,34 +19,34 @@
       		"mixId": mixItem.Merchandising_Mix__c,
       		"productId": mixItem.Merchandise__c,
       		"qty": mixItem.Qty__c
-	    	});
-	    	action.setCallback(this, function(response) {
+        });
+        action.setCallback(this, function(response) {
 			var result = response.getReturnValue();
             mixItem.Id = result.Id;
             this.calculateMix(component);
-	    	});
-	    	$A.enqueueAction(action);
+        });
+        $A.enqueueAction(action);
 	},
 
     updateItem : function(component, mixItem) {
         var action = component.get("c.updateMixItem");
 		action.setParams({
       		"mixItem": mixItem
-	    	});
+        });
 		action.setCallback(this, function(response) {
             this.calculateMix(component);
-	    	});
-	    	$A.enqueueAction(action);
+        });
+        $A.enqueueAction(action);
 	},
 
 	removeItem : function(component, mixItem) {
         var action = component.get("c.removeMixItem");
 		action.setParams({
       		"mixItemId": mixItem.Id
-	    	});
-	    	action.setCallback(this, function(response) {
-	    		var result = response.getReturnValue();
-	    		var mixItems = component.get("v.mixItems");
+        });
+        action.setCallback(this, function(response) {
+            var result = response.getReturnValue();
+            var mixItems = component.get("v.mixItems");
             for (var i=0; i<mixItems.length; i++) {
                 if(mixItems[i].Id === mixItem.Id) {
                     mixItems.splice(i, 1);
@@ -55,8 +55,8 @@
                     return;
                 }
             }
-	    	});
-	    	$A.enqueueAction(action);
+        });
+        $A.enqueueAction(action);
 	},
 
     calculateMix : function(component) {

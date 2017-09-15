@@ -20,7 +20,7 @@
                     <lightning:layoutitem >
                         <p class="slds-text-title slds-truncate slds-m-bottom_xx-small">Total MSRP</p>
                         <p class="slds-text-heading_small slds-truncate total-msrp">
-                            $<span aura:id="totalMSRP">0</span>
+                            {!$Locale.currency}<span aura:id="totalMSRP">0</span>
                         </p>
                     </lightning:layoutitem>
                     <lightning:layoutitem >

@@ -12,7 +12,7 @@
             step: step,
             format: {
                 to: function (value ) {
-					return '$' + Math.round(value);
+					return $A.get("$Locale.currency") + Math.round(value);
                 },
                 from: function ( value ) {
                     return value;
@@ -25,11 +25,12 @@
         });
 
 		slider.noUiSlider.on('change', $A.getCallback(function(range) {
-            var myEvent = $A.get("e.c:RangeChange");
+            let currency =  $A.get("$Locale.currency");
+            let myEvent = $A.get("e.c:RangeChange");
         	myEvent.setParams({
         		"filterName": component.get("v.filterName"),
-            	"minValue": range[0].replace('$', ''),
-            	"maxValue": range[1].replace('$', '')
+            	"minValue": range[0].replace(currency, ''),
+            	"maxValue": range[1].replace(currency, '')
             });
 			myEvent.fire();
         }));
