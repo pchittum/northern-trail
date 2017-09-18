@@ -34,10 +34,30 @@
       		"mixItem": mixItem
         });
 		action.setCallback(this, function(response) {
-            this.calculateMix(component);
+            let state = response.getState();
+            if (state === 'SUCCESS') {
+                this.calculateMix(component);
+            }
+            else if (state === 'ERROR') {
+                this.handleErrors(response.getError());
+            }
         });
         $A.enqueueAction(action);
 	},
+
+    handleErrors : function(errors) {
+        let toastParams = {
+            message : 'Unknown error',
+            type : 'error',
+            title : 'Error'
+        };
+        if (errors && Array.isArray(errors) && errors.length > 0) {
+            toastParams.message = errors[0].message;
+        }
+        let toastEvent = $A.get("e.force:showToast");
+        toastEvent.setParams(toastParams);
+        toastEvent.fire();
+    },
 
 	removeItem : function(component, mixItem) {
         var action = component.get("c.removeMixItem");
