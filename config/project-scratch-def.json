@@ -2,6 +2,7 @@
     "orgName": "LNT17 Demo",
     "edition": "Developer",
     "country": "GB",
+    "adminEmail": "pchittum@salesforce.com",
     "orgPreferences" : {
         "enabled": ["S1DesktopEnabled"]
     }

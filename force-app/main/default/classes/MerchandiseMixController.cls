@@ -19,6 +19,11 @@ global with sharing class MerchandiseMixController {
         
 	@AuraEnabled
     public static Mix_Item__c updateMixItem(Mix_Item__c mixItem) {
+        // Check available stock
+        Merchandise__c merch = [SELECT Name, Stock__c FROM Merchandise__c WHERE Id = :mixItem.Merchandise__r.Id];
+        if (mixItem.Qty__c > merch.Stock__c) {
+            throw new AuraHandledException('Insufficient stock. Available '+ merch.Name +': '+ merch.Stock__c);
+        }
         update mixItem;
 		return mixItem;
     } 
